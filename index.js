@@ -12,10 +12,37 @@ const sequelize = new Sequelize(process.env.DB, process.env.USER, process.env.PA
     try {
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
-        await sequelize.sync()
 
-        const {Cliente, Compra} = require('./models')
+        const {Cliente, Compra, Produto, ProdutoCompra} = require('./models')
 
+        await sequelize.sync({alter:true})
+        /*
+        const produto1 = await Produto.create({
+            nome: 'Faca',
+            preco: 25
+        })
+        const produto2 = await Produto.create({
+            nome: 'Panela',
+            preco: 56
+        })
+        */
+        /*
+        const compra = await Compra.create({
+            valor: 50.25,
+            cliente_id: 6
+        })
+        
+
+        const produtoCompra1 = await ProdutoCompra.create({
+            ProdutoProdutoId: 1,
+            CompraCompraId: 5
+        })
+        const produtoCompra2 = await ProdutoCompra.create({
+            ProdutoProdutoId: 2,
+            CompraCompraId: 5
+        })
+
+        
         const cliente = await Cliente.create({
             nome: 'John Doe 5'
         })
@@ -26,7 +53,7 @@ const sequelize = new Sequelize(process.env.DB, process.env.USER, process.env.PA
             valor: 50.25,
             cliente_id: cliente['cliente_id']
         })
-
+        */
     } catch (error) {
         console.error('Unable to connect to the database:', error);
     }

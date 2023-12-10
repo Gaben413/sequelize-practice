@@ -44,12 +44,17 @@ const Produto = sequelize.define('Produto', {
     }
 })
 
+const ProdutoCompra = sequelize.define('ProdutoCompra', {
+    produto_id: DataTypes.INTEGER,
+    compra_id: DataTypes.INTEGER
+})
+
 Cliente.hasMany(Compra, {
     foreignKey: 'cliente_id'
 })
 //Compra.hasOne(Cliente)
 
-Produto.belongsToMany(Compra, {through: 'ProdutoCompra'})
-Compra.belongsToMany(Produto, {through: 'ProdutoCompra'})
+Produto.belongsToMany(Compra, {through: ProdutoCompra, foreignKey: 'produto_id'})
+Compra.belongsToMany(Produto, {through: ProdutoCompra, foreignKey: 'compra_id'})
 
-module.exports = {Cliente, Compra, Produto}
+module.exports = {Cliente, Compra, Produto, ProdutoCompra}
